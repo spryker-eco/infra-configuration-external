@@ -1,5 +1,5 @@
-resource "aws_s3_bucket" "testenv1-bucket" {
-  bucket = "testenv1-bucket"
+resource "aws_s3_bucket" "testenv2-bucket" {
+  bucket = "testenv2-bucket"
 
   tags = {
     Name        = "My bucket"
@@ -9,6 +9,6 @@ resource "aws_s3_bucket" "testenv1-bucket" {
 }
 
 resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.testenv1-bucket.id
+  bucket = aws_s3_bucket.testenv2-bucket.id
   acl    = "private"
 }
