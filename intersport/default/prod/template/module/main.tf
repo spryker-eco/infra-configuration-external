@@ -1,5 +1,5 @@
 
 resource "aws_iam_user" "lb" {
-  name = "test"
+  name = "intersport-test"
   path = "/system/"
 }
