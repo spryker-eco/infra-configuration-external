@@ -1,0 +1,22 @@
+version: 3
+projects:
+  - dir: uat/default/ops/template
+    workflow: terragrunt
+workflows:
+  terragrunt:
+    plan:
+      steps:
+        - run: curl -Llo "/tmp/terragrunt" https://github.com/gruntwork-io/terragrunt/releases/download/v0.43.2/terragrunt_linux_amd64
+        - run: chmod +x /tmp/terragrunt
+        - env:
+            name: TERRAGRUNT_TFPATH
+            command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+        - run: /tmp/terragrunt run-all plan -out $PLANFILE
+    apply:
+      steps:
+        - run: curl -Llo "/tmp/terragrunt" https://github.com/gruntwork-io/terragrunt/releases/download/v0.43.2/terragrunt_linux_amd64
+        - run: chmod +x /tmp/terragrunt
+        - env:
+            name: TERRAGRUNT_TFPATH
+            command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+        - run: /tmp/terragrunt run-all apply $PLANFILE
